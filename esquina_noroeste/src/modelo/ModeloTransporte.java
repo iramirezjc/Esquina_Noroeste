@@ -48,27 +48,23 @@ public class ModeloTransporte {
             for(int j = 0; j < getTamanioDemandas(); j++)
                 costos[i][j] = sc.nextInt();
     }
-    public int[] obtenerOfertas() { return ofertas; }
-    public int[] obtenerDemandas() { return demandas; }
-    public int[][] obtenerCostos() { return costos; }
-    public int getTamanioOfertas() { return ofertas.length; }
-    public int getTamanioDemandas() { return demandas.length; }
-    /*public void mostrarOfertas() {
+    public int[] obtenerOfertas() { 
+        return ofertas; 
+    }
+    public int[] obtenerDemandas() { 
+        return demandas; 
+    }
+    public int[][] obtenerCostos() { 
+        return costos; 
+    }
+    public int getTamanioOfertas() { 
+        return ofertas.length; 
+    }
+    public int getTamanioDemandas() { 
+        return demandas.length; 
+    }
+    public void mostrarOfertas() {
         for (int valor: ofertas)
             System.out.print(valor);
     }
-    public void mostrarDemandas() {
-        for (int valor: demandas)
-            System.out.print(valor);
-    }
-    public void mostrarCostos() {
-        for (int valores[]: costos) {
-            for (int valor: valores) {
-                System.out.print(valor + " ");
-            }
-            System.out.println();
-        }
-    }
-    
-    */
 }

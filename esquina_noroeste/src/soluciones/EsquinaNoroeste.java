@@ -10,33 +10,52 @@ package soluciones;
  */
 public class EsquinaNoroeste {
     private int[][] solucionInicial;
-    private int costoAsociado;
+    private String solucion;
+    private int menorCosto = Integer.MAX_VALUE;
   
-    public EsquinaNoroeste() {
-        costoAsociado = 0;
-    }
     public void ruta(int[][] cantidades, int[]ofertas, int[] demandas) {
-        int i = 0;
-        int j = 0;
-        int costo = 0;
+        int[] copiaOfertas = ofertas.clone();
+        int[] copiaDemandas = demandas.clone();
+        String variables = "";
+        int i = 0, j = 0, costo = 0;
         
-        while (i < ofertas.length && j < demandas.length) {
-            int asignar = Math.min(ofertas[i], demandas[j]);
+        while (i < copiaOfertas.length && j < copiaDemandas.length) {
+            int asignar = Math.min(copiaOfertas[i], copiaDemandas[j]);
             
-            ofertas[i] -= asignar;
-            demandas[j] -= asignar;
+            copiaOfertas[i] -= asignar;
+            copiaDemandas[j] -= asignar;
             costo += (cantidades[i][j] * asignar);
-            System.out.println("X" + i + j + " = " + asignar);
             
-            if (ofertas[i] == 0 && i < ofertas.length) i++;
-            else if (demandas[j] == 0 && j < demandas.length) j++;
+            variables += "X" + i + j + " = " + asignar + "\n";
+            if (copiaOfertas[i] == 0 && i < copiaOfertas.length) i++;
+            else if (copiaDemandas[j] == 0 && j < copiaDemandas.length) j++;
         }
-        asignarCostoAsociado(costo);
+        if (costo < obtenerMenorCosto()) {
+            asignarMenorCosto(costo);
+            variableSolucion(variables);
+            
+            solucionInicial = new int[ofertas.length][demandas.length];
+            solucionInicial = cantidades.clone();
+        }
     }
-    public void asignarCostoAsociado(int resultado) {
-        costoAsociado = resultado;
+    public void asignarMenorCosto(int costo) {
+        menorCosto = costo;
     }
-    public int obtenerCostoAsociado() {
-        return costoAsociado;
+    public int obtenerMenorCosto() {
+        return menorCosto;
+    }
+    public void variableSolucion(String result) {
+        solucion = result;
+    }
+    public String verVariableSolucion() {
+        return solucion;
+    }
+    public void mostrarMatrizSolucion() {
+        for (int valores[]: solucionInicial) {
+            for (int valor: valores) {
+                System.out.print(valor + " ");
+            }
+            System.out.println();
+        }
     }
 }
