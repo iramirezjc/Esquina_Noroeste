@@ -9,9 +9,11 @@ package soluciones;
  * @author Ignacio
  */
 public class EsquinaNoroeste {
-    private int[][] solucionInicial;
-    private String solucion;
     private int menorCosto = Integer.MAX_VALUE;
+    private int[][] solucionInicial;
+    private int[] nuevasOfertas;
+    private int[] nuevasDemandas;
+    private String solucion;
   
     public void ruta(int[][] cantidades, int[]ofertas, int[] demandas) {
         int[] copiaOfertas = ofertas.clone();
@@ -26,16 +28,16 @@ public class EsquinaNoroeste {
             copiaDemandas[j] -= asignar;
             costo += (cantidades[i][j] * asignar);
             
-            variables += "X" + i + j + " = " + asignar + "\n";
-            if (copiaOfertas[i] == 0 && i < copiaOfertas.length) i++;
-            else if (copiaDemandas[j] == 0 && j < copiaDemandas.length) j++;
+            variables += "X" + (i + 1) + (j + 1) + " = " + asignar + "\n";
+            if (copiaOfertas[i] == 0) i++;
+            else if (copiaDemandas[j] == 0) j++;
         }
         if (costo < obtenerMenorCosto()) {
             asignarMenorCosto(costo);
             variableSolucion(variables);
-            
-            solucionInicial = new int[ofertas.length][demandas.length];
-            solucionInicial = cantidades.clone();
+            asignarMatrizSolucion(cantidades, ofertas.length, demandas.length);
+            asignarNuevasOfertas(ofertas);
+            asignarNuevasDemandas(demandas);
         }
     }
     public void asignarMenorCosto(int costo) {
@@ -50,12 +52,36 @@ public class EsquinaNoroeste {
     public String verVariableSolucion() {
         return solucion;
     }
-    public void mostrarMatrizSolucion() {
-        for (int valores[]: solucionInicial) {
-            for (int valor: valores) {
-                System.out.print(valor + " ");
-            }
-            System.out.println();
+    public void asignarMatrizSolucion(int[][] matriz, int filas, int columnas) {
+        solucionInicial = new int[filas][columnas];
+        for (int i = 0; i < matriz.length; i++) {
+            System.arraycopy(matriz[i], 0, solucionInicial[i], 0, matriz[i].length);
         }
+    }
+    public void asignarNuevasOfertas(int[] lista) {
+        nuevasOfertas = new int[lista.length];
+        System.arraycopy(lista, 0, nuevasOfertas, 0, lista.length);
+    }
+    public void asignarNuevasDemandas(int[] lista) {
+        nuevasDemandas = new int[lista.length];
+        System.arraycopy(lista, 0, nuevasDemandas, 0, lista.length);
+    }
+    public void mostrarMatrizSolucion() {
+        for (int i = 0; i < nuevasOfertas.length; i++) {
+            for (int j = 0; j < nuevasDemandas.length; j++) {
+                if (solucionInicial[i][j] < 10)
+                    System.out.print(" " + solucionInicial[i][j] + " ");
+                else
+                    System.out.print(solucionInicial[i][j] + " ");
+            }
+            System.out.println(" " + nuevasOfertas[i]);
+        }
+        for (int demandas: nuevasDemandas) {
+            if (demandas < 10)
+                System.out.print(" " + demandas + " ");
+            else
+                System.out.print(demandas + " ");
+        }
+        System.out.println();
     }
 }

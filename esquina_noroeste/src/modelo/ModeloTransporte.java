@@ -30,15 +30,19 @@ public class ModeloTransporte {
         ofertas = new int[getTamanio()]; 
     }
     public void asignarOfertas() {
-        for (int i = 0; i < getTamanio(); i++)
+        for (int i = 0; i < getTamanio(); i++) {
+            System.out.print("Valor " + (i + 1) + ": ");
             ofertas[i] = sc.nextInt();
+        }
     }
     public void inicializarDemandas() { 
         demandas = new int[getTamanio()]; 
     }
     public void asignarDemandas() {
-        for (int i = 0; i < getTamanio(); i++)
+        for (int i = 0; i < getTamanio(); i++) {
+            System.out.print("Valor " + (i + 1) + ": ");
             demandas[i] = sc.nextInt();
+        }
     }
     public void inicializarCostos() { 
         costos = new int[getTamanioOfertas()][getTamanioDemandas()]; 
