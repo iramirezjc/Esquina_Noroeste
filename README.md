@@ -7,4 +7,7 @@ el valor más óptimo
 Java 17 ó superior
 
 ## Instalación
+Descarga el .zp de la carpeta `aplicacion`
+Extrae el contenido en una carpeta y
+Ejecuta el archivo esquina_noroeste.bat
 
