@@ -55,6 +55,7 @@ public class Main {
             input = scanner.nextLine().trim();  // Lee la línea completa y quita espacios
             control = input.isEmpty() ? ' ' : input.charAt(0);  // Toma el primer carácter
         }
+        System.out.println("Programa terminado...");
         scanner.close();
     }
 }
